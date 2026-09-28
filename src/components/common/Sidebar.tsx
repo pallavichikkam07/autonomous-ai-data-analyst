@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
+  Bot,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -22,6 +23,7 @@ interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
   onNewAnalysisClick: () => void;
+  onOpenChatModal?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -31,6 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   collapsed,
   setCollapsed,
   onNewAnalysisClick,
+  onOpenChatModal,
 }) => {
   const navItems = [
     { id: 'dashboard' as Page, label: 'Dashboard', icon: LayoutDashboard },
@@ -40,6 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       icon: Sparkles,
       action: onNewAnalysisClick,
     },
+    { id: 'n8n-chat' as Page, label: 'n8n AI Chatbot', icon: Bot, badge: 'n8n' },
     { id: 'datasets' as Page, label: 'Datasets', icon: Database },
     { id: 'history' as Page, label: 'Analysis History', icon: History },
     { id: 'reports' as Page, label: 'Reports', icon: FileText },
@@ -126,6 +130,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {!collapsed && item.id === 'new-analysis' && (
                   <span className="ml-auto text-[10px] font-mono font-semibold text-indigo-400 bg-indigo-950/60 px-1.5 py-0.5 rounded border border-indigo-800/40">
                     AI
+                  </span>
+                )}
+                {!collapsed && item.id === 'n8n-chat' && (
+                  <span className="ml-auto text-[10px] font-mono font-semibold text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800/40">
+                    LIVE
                   </span>
                 )}
               </button>

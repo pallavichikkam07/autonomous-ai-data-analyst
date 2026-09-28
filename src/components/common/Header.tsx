@@ -9,6 +9,7 @@ import {
   Sun,
   Moon,
   Compass,
+  Bot,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -18,6 +19,8 @@ interface HeaderProps {
   theme: 'dark' | 'light';
   toggleTheme: () => void;
   onNewAnalysis?: () => void;
+  onToggleChat?: () => void;
+  isChatOpen?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -27,6 +30,8 @@ export const Header: React.FC<HeaderProps> = ({
   theme,
   toggleTheme,
   onNewAnalysis,
+  onToggleChat,
+  isChatOpen,
 }) => {
   const isLanding = currentPage === 'landing';
 
@@ -108,10 +113,34 @@ export const Header: React.FC<HeaderProps> = ({
           >
             History
           </button>
+          <button
+            onClick={() => setCurrentPage('n8n-chat')}
+            className={`flex items-center gap-1.5 transition-colors hover:text-white ${
+              currentPage === 'n8n-chat' ? 'text-cyan-400 font-semibold' : ''
+            }`}
+          >
+            <Bot className="h-3.5 w-3.5 text-cyan-400" />
+            <span>n8n Chatbot</span>
+          </button>
         </nav>
 
         {/* Zone 3: 1-2 primary actions */}
         <div className="flex items-center gap-3">
+          {onToggleChat && (
+            <button
+              onClick={onToggleChat}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                isChatOpen
+                  ? 'bg-cyan-950/80 border-cyan-500/50 text-cyan-300'
+                  : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:border-slate-700'
+              }`}
+              title="Toggle n8n Chatbot"
+            >
+              <Bot className="h-3.5 w-3.5 text-cyan-400" />
+              <span className="hidden sm:inline">n8n Chat</span>
+            </button>
+          )}
+
           <button
             onClick={toggleTheme}
             aria-label="Toggle visual theme"

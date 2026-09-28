@@ -7,6 +7,7 @@ export type Page =
   | 'reports'
   | 'knowledge'
   | 'architecture'
+  | 'n8n-chat'
   | 'settings';
 
 export interface ColumnMeta {
@@ -142,6 +143,16 @@ export interface KnowledgeDoc {
   summary: string;
 }
 
+export interface N8nChatMessage {
+  id: string;
+  sender: 'user' | 'bot' | 'system';
+  text: string;
+  timestamp: string;
+  error?: boolean;
+  hint?: string;
+  metadata?: any;
+}
+
 export interface AppSettings {
   geminiModel: string;
   temperature: number;
@@ -155,4 +166,6 @@ export interface AppSettings {
   ragOverlap: number;
   embeddingModel: string;
   theme: 'dark' | 'light';
+  n8nWebhookUrl: string;
+  n8nTestMode: boolean;
 }

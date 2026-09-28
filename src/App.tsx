@@ -31,8 +31,9 @@ import { AnalysisHistory } from './components/history/AnalysisHistory';
 import { SettingsView } from './components/settings/SettingsView';
 import { DatasetsView } from './components/datasets/DatasetsView';
 import { ReportsView } from './components/reports/ReportsView';
+import { N8nChatbot } from './components/chatbot/N8nChatbot';
 import { createInitialAgentSteps, generateRunForQuery } from './utils/agentRunner';
-import { Sparkles, ArrowRight, Layers, Database } from 'lucide-react';
+import { Sparkles, ArrowRight, Layers, Database, Bot, MessageSquare } from 'lucide-react';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('landing');
@@ -47,6 +48,7 @@ export default function App() {
   const [isFullDatasetOpen, setIsFullDatasetOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isReindexing, setIsReindexing] = useState(false);
+  const [isFloatingChatOpen, setIsFloatingChatOpen] = useState(false);
 
   // Synchronize theme with body
   useEffect(() => {
@@ -199,6 +201,8 @@ export default function App() {
         theme={settings.theme}
         toggleTheme={toggleTheme}
         onNewAnalysis={handleNewAnalysis}
+        onToggleChat={() => setIsFloatingChatOpen(!isFloatingChatOpen)}
+        isChatOpen={isFloatingChatOpen}
       />
 
       {/* Main Viewport */}
@@ -335,6 +339,29 @@ export default function App() {
 
             {currentPage === 'architecture' && <AgentArchitecture />}
 
+            {currentPage === 'n8n-chat' && (
+              <div className="space-y-4">
+                <div className="border-b border-slate-800 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                      <Bot className="h-5 w-5 text-cyan-400" />
+                      <span>n8n Autonomous AI Chatbot</span>
+                    </h2>
+                    <p className="text-xs text-slate-400">
+                      Live interactive AI assistant connected to your n8n workflow.
+                    </p>
+                  </div>
+                </div>
+
+                <N8nChatbot
+                  webhookUrl={settings.n8nWebhookUrl}
+                  activeDataset={activeDataset}
+                  mode="full"
+                  onNavigateToDatasets={() => setCurrentPage('datasets')}
+                />
+              </div>
+            )}
+
             {currentPage === 'history' && (
               <AnalysisHistory
                 runs={historyRuns}
@@ -352,6 +379,44 @@ export default function App() {
             )}
           </main>
         </div>
+      )}
+
+      {/* Floating n8n Chatbot Button & Widget */}
+      {currentPage !== 'n8n-chat' && (
+        <>
+          {/* Floating Widget */}
+          {isFloatingChatOpen && (
+            <N8nChatbot
+              webhookUrl={settings.n8nWebhookUrl}
+              activeDataset={activeDataset}
+              mode="floating"
+              isOpen={isFloatingChatOpen}
+              onClose={() => setIsFloatingChatOpen(false)}
+              onNavigateToDatasets={() => {
+                setIsFloatingChatOpen(false);
+                setCurrentPage('datasets');
+              }}
+            />
+          )}
+
+          {/* Floating Launcher Button */}
+          {!isFloatingChatOpen && (
+            <button
+              onClick={() => setIsFloatingChatOpen(true)}
+              className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 rounded-full bg-gradient-to-r from-indigo-600 via-indigo-600 to-cyan-600 px-4 py-3 text-white shadow-xl shadow-indigo-600/30 hover:scale-105 hover:shadow-indigo-600/45 transition-all group"
+              aria-label="Open n8n Chatbot"
+            >
+              <div className="relative">
+                <Bot className="h-5 w-5 transition-transform group-hover:rotate-12" />
+                <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
+                </span>
+              </div>
+              <span className="text-xs font-bold tracking-tight pr-1">n8n Agent</span>
+            </button>
+          )}
+        </>
       )}
 
       {/* Full Dataset Modal */}

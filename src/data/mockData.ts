@@ -13,6 +13,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
   ragOverlap: 64,
   embeddingModel: 'text-embedding-004',
   theme: 'dark',
+  n8nWebhookUrl: 'https://pallavichikkam.app.n8n.cloud/webhook/f3a7a56e-eb8f-4928-a4c6-8feb302abca9/chat',
+  n8nTestMode: false,
 };
 
 export const DEFAULT_DATASETS: Dataset[] = [

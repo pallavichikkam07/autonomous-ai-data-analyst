@@ -12,6 +12,7 @@ import {
   AlertCircle,
   Lock,
   Zap,
+  Bot,
 } from 'lucide-react';
 
 interface SettingsViewProps {
@@ -276,7 +277,64 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
         </div>
 
-        {/* Section 4: Visual Theme */}
+        {/* Section 4: n8n AI Chatbot Integration */}
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-sm font-bold text-white">
+              <Bot className="h-4 w-4 text-cyan-400" />
+              <span>n8n AI Chatbot Webhook</span>
+            </div>
+            <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800/60">
+              Active Endpoint
+            </span>
+          </div>
+
+          <div className="space-y-3">
+            <div>
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                Webhook Production URL
+              </label>
+              <input
+                type="url"
+                value={formState.n8nWebhookUrl}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    n8nWebhookUrl: e.target.value,
+                  })
+                }
+                className="w-full rounded-xl bg-slate-950 border border-slate-800 px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-cyan-500"
+              />
+              <p className="text-[11px] text-slate-400 mt-1">
+                Connected to your n8n cloud instance. Requires the workflow to be toggled to <strong>Active</strong> in the n8n editor.
+              </p>
+            </div>
+
+            <label className="flex items-center gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={formState.n8nTestMode}
+                onChange={(e) =>
+                  setFormState({
+                    ...formState,
+                    n8nTestMode: e.target.checked,
+                  })
+                }
+                className="rounded text-cyan-600 focus:ring-0"
+              />
+              <div>
+                <div className="text-xs font-semibold text-white">
+                  Route to Test Webhook (<code className="text-cyan-400 font-mono text-[10px]">/webhook-test/...</code>)
+                </div>
+                <div className="text-[11px] text-slate-400">
+                  Enable when running manual test executions from the n8n canvas using "Execute workflow".
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        {/* Section 5: Visual Theme */}
         <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div>
