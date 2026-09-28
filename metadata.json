@@ -1,0 +1,6 @@
+{
+  "name": "AutonomousAI – Multi-Agent Data Analyst",
+  "description": "Autonomous multi-agent AI system for dataset analysis, natural language queries, automated Python/SQL investigation, RAG verification, and interactive executive reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
