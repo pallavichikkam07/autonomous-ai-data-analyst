@@ -1,0 +1,31 @@
+Product,Category,Revenue,Units_Sold,Region
+Phone,Electronics,11000,22,North America
+Laptop,Electronics,9500,10,North America
+Standing_Desk,Furniture,8900,11,Europe
+Desk,Furniture,8600,14,North America
+Gaming_Chair,Furniture,7800,13,North America
+Tablet,Electronics,7200,16,Europe
+Chair,Furniture,6400,16,Europe
+Smartwatch,Electronics,5400,27,APAC
+External_SSD,Electronics,5100,17,North America
+Monitor,Electronics,4800,12,North America
+Docking_Station,Accessories,4200,21,North America
+Graphic_Tablet,Electronics,4100,10,Europe
+Headphones,Electronics,3900,26,Europe
+Bookshelf,Furniture,3500,14,APAC
+Keyboard,Accessories,3200,32,Europe
+Microphone,Electronics,3100,15,Europe
+Speaker,Electronics,2900,19,North America
+Earbuds,Electronics,2700,36,North America
+Filing_Cabinet,Furniture,2600,13,North America
+Webcam,Electronics,2400,24,APAC
+Power_Bank,Electronics,2200,44,Europe
+Mouse,Accessories,2100,42,APAC
+Lamp,Furniture,1800,30,APAC
+Backpack,Accessories,1600,32,Europe
+Wireless_Charger,Accessories,1500,30,APAC
+USB_Hub,Accessories,1200,40,APAC
+Desk_Organizer,Accessories,950,38,Europe
+HDMI_Cable,Accessories,800,80,North America
+Cable_Management,Accessories,750,50,APAC
+Mouse_Pad,Accessories,650,65,APAC

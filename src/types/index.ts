@@ -150,6 +150,8 @@ export interface N8nChatMessage {
   timestamp: string;
   error?: boolean;
   hint?: string;
+  isFallback?: boolean;
+  n8nError?: string;
   metadata?: any;
 }
 

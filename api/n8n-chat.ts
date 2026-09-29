@@ -23,6 +23,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
+  if (req.method === 'GET') {
+    try {
+      const targetUrl = 'https://pallavichikkam.app.n8n.cloud/webhook/f3a7a56e-eb8f-4928-a4c6-8feb302abca9/chat';
+      const pingRes = await fetch(targetUrl, { method: 'GET' });
+      res.statusCode = pingRes.status;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify({ status: pingRes.status, ok: pingRes.ok }));
+    } catch (e: any) {
+      res.statusCode = 502;
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify({ error: e.message }));
+    }
+    return;
+  }
+
   if (req.method !== 'POST') {
     res.statusCode = 405;
     res.setHeader('Content-Type', 'application/json');
